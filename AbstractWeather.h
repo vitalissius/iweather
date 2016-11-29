@@ -90,11 +90,11 @@ private:
     std::string m_pubDate;
     LanguagePack m_langPack;
 
-private:
+protected:
     /* AbstractWeather's private constant static member */
     static const int msc_forecastSize = 5;
 
-public:
+protected:
     /* AbstractWeather's manager methods */
     AbstractWeather();
     virtual ~AbstractWeather() = 0;

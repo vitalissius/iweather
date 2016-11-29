@@ -190,7 +190,12 @@ void AbstractWeather::SetCondition(int code, int temp, const char* text)
 
 void AbstractWeather::SetAstronomy(const char* sunrise, const char* sunset)
 {
-    m_astronomy = Astronomy(sunrise, sunset);
+    Astronomy astronomy(sunrise, sunset);
+    if (astronomy.m_clockSystemUnit != m_astronomy.m_clockSystemUnit)
+    {
+        astronomy.changeClockSystemTo(m_astronomy.m_clockSystemUnit);
+    }
+    m_astronomy = astronomy;
 }
 
 void AbstractWeather::SetAtmosphere(int humidity, float pressure, int pressureState)

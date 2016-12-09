@@ -219,7 +219,22 @@ void AbstractWeather::SetPublicationDate(const char* pubDate)
 
 
 /* AbstractWeather's accessor methods */
-#include <cassert>
+
+int AbstractWeather::GetConditionCode() const
+{
+    return m_condition.m_code;
+}
+
+int AbstractWeather::GetConditionTemt() const
+{
+    return m_condition.m_temp;
+}
+
+const std::string& AbstractWeather::GetConditionText() const
+{
+    return m_condition.m_text;
+}
+
 const std::vector<AbstractWeather::Forecast>& AbstractWeather::GetForecastVector() const
 {
     if (msc_forecastSize != m_forecast.size())

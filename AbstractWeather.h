@@ -144,9 +144,11 @@ protected:
 public:
     /* AbstractWeather's accessor methods */
     
-    //int GetConditionCode() const { return m_condition.m_code; }
-    //int GetConditionTemt() const { return m_condition.m_temp; }
-    //const std::string& GetConditionText() const { return m_condition.m_text; }
+    int GetConditionCode() const;
+
+    int GetConditionTemt() const;
+
+    const std::string& GetConditionText() const;
 
     //@return: Ref to the vector of the Forecast-s (size of the vector must be equal msc_forecastSize)
     const std::vector<Forecast>& GetForecastVector() const;

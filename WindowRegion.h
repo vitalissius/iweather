@@ -19,6 +19,10 @@ private:
 
 public:
     WindowRegion(int x1, int y1, int x2, int y2, int roundw=0, int roundh=0);
+    WindowRegion(const WindowRegion&) = delete;
+    WindowRegion& operator=(const WindowRegion&) = delete;
+    WindowRegion(WindowRegion&&) = default;
+    WindowRegion& operator=(WindowRegion&&) = default;
     WindowRegion& SetRound(int roundw, int roundh);
     WindowRegion& UnsetRound();
     WindowRegion& ResetRegion(int x1, int y1, int x2, int y2);

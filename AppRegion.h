@@ -11,6 +11,11 @@ private:
 
 public:
     AppRegion(HWND hwnd, int x, int y, POINT max, POINT min);
+    AppRegion(const AppRegion&) = delete;
+    AppRegion& operator=(const AppRegion&) = delete;
+    AppRegion(AppRegion&&) = default;
+    AppRegion& operator=(AppRegion&&) = default;
+    ~AppRegion() = default;
     // Must be invoked while receiving message WM_CREATE
     int ApplyToWindow() const;
     int UnmakeRounding();

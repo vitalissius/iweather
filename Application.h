@@ -29,6 +29,11 @@ public:
         UINT windowStyleEx=(WS_EX_LAYERED | WS_EX_TOOLWINDOW),
         int xPos=CW_USEDEFAULT,
         int yPos=0);
+    Application(const Application&) = delete;
+    Application& operator=(const Application&) = delete;
+    Application(Application&&) = delete;
+    Application& operator=(Application&&) = delete;
+    ~Application() = default;
     WPARAM Run();
     BOOL SetTransparency(const int percent=0);
 };

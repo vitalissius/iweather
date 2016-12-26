@@ -1,6 +1,6 @@
 #include "Application.h"
 
-bool Application::isAlreadyRunning()
+bool Application::IsAlreadyRunning()
 {
     HANDLE mtx = CreateMutex(NULL, FALSE, TEXT("{A393562E-EF7A-459F-A920-0286403D4A9B++}"));
     if (GetLastError() == ERROR_ALREADY_EXISTS)
@@ -29,13 +29,6 @@ Application::Application(
     int yPos)
 {
     static constexpr TCHAR* tcsClassName = TEXT("WeatherApp-42");
-
-    if (isAlreadyRunning())
-    {
-        UINT mb = MB_ICONWARNING | MB_OK;
-        MessageBox(NULL, TEXT("Application is already running"), TEXT("Info"), mb);
-        return;
-    }
 
     m_wcex.cbSize = sizeof(WNDCLASSEX);
     m_wcex.style = classStyle;

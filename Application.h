@@ -13,9 +13,6 @@ private:
     HWND m_mainWnd{};
     WNDCLASSEX m_wcex{};
 
-private:
-    bool isAlreadyRunning();
-
 public:
     Application(
         LPCTSTR windowName,
@@ -36,6 +33,7 @@ public:
     ~Application() = default;
     WPARAM Run();
     BOOL SetTransparency(const int percent=0);
+    static bool IsAlreadyRunning();
 };
 
 #endif // APPLICATION_H

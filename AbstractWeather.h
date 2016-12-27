@@ -97,6 +97,8 @@ protected:
 protected:
     /* AbstractWeather's manager methods */
     AbstractWeather();
+
+public:
     virtual ~AbstractWeather() = 0;
 
     /* AbstractWeather's mutator methods */

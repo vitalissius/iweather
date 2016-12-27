@@ -210,4 +210,7 @@ private:
     float to_MilliBar() const;
     float to_MillimeterOfMercury() const;
     float to_InchesOfMercury() const;
+
+public:
+    virtual void Update(const std::string& woeid) = 0;
 };

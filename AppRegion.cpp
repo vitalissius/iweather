@@ -1,9 +1,9 @@
 #include "AppRegion.h"
 
-AppRegion::AppRegion(HWND hwnd, int x, int y, POINT max, POINT min)
+AppRegion::AppRegion(HWND hwnd, int x, int y, POINT min, POINT max)
     : m_hWnd(hwnd)
-    , m_max(max)
     , m_min(min)
+    , m_max(max)
     , m_windowRegion(x, y, m_max.x, m_max.y)
 {}
 

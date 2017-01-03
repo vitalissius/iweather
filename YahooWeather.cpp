@@ -210,7 +210,11 @@ std::string Places::makePlace(const char* pszTown, const char* pszCountry, const
 void YahooWeather::Update(const std::string& woeid)
 {
     const std::string page = downloadData(woeid, ::Table::WEATHER_FORECAST);
-
+    if (page.size() < 3000u)
+    {
+        // If XML page does not contains complete data - do not update status
+        return;
+    }
     tinyxml2::XMLDocument document;
     document.Parse(page.data(), page.size());
 

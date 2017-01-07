@@ -2,7 +2,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "Tstring.h"
+#include "Utility.h"
 
 #include <Windows.h>
 

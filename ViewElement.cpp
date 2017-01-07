@@ -1,4 +1,4 @@
-#include "Label.h"
+#include "ViewElement.h"
 
 void InitLabelText(Label& label, HFONT font, const TCHAR* labelText, const PTSTR tipText, const TCHAR* tipTitleText)
 {
@@ -11,8 +11,6 @@ void InitLabelText(Label& label, HFONT font, const TCHAR* labelText, const PTSTR
         if (tipTitleText) { label.SetTipTitle(tipTitleText); }
     }
 };
-
-
 
 Label::Label(HWND parentWnd, UINT labelId, RECT rect, LabelType labelType, DWORD additStyle)
     : m_parentWindowHandle(parentWnd)
@@ -47,21 +45,15 @@ Label::Label(HWND parentWnd, UINT labelId, RECT rect, LabelType labelType, DWORD
     }
 }
 
-
-
 void Label::Make(HWND parentWnd, UINT labelId, RECT rect, LabelType labelType, DWORD additStyle)
 {
     *this = std::move(Label(parentWnd, labelId, rect, labelType, additStyle));
 }
 
-
-
 BOOL Label::SetWindowPosition(RECT rect)
 {
     return SetWindowPos(m_labelWindowHandle, HWND_TOP, rect.left, rect.top, rect.right, rect.bottom, SWP_SHOWWINDOW);
 }
-
-
 
 int Label::SetText(const TCHAR* text)
 {
@@ -81,14 +73,10 @@ int Label::SetText(const TCHAR* text)
     return rval;
 }
 
-
-
 LRESULT Label::SetFont(HFONT hfont)
 {
     return SendMessage(m_labelWindowHandle, WM_SETFONT, (WPARAM)hfont, (LPARAM)TRUE);
 }
-
-
 
 LRESULT Label::SetTipText(const PTSTR text)
 {
@@ -96,14 +84,10 @@ LRESULT Label::SetTipText(const PTSTR text)
     return SendMessage(m_tipWindowHandle, TTM_UPDATETIPTEXT, 0, (LPARAM)&m_tipToolInfo);
 }
 
-
-
 LRESULT Label::SetTipTitle(const TCHAR* text)
 {
     return SendMessage(m_tipWindowHandle, TTM_SETTITLE, (WPARAM)0, (LPARAM)text);
 }
-
-
 
 Label::LabelType Label::GetLabelType() const
 {

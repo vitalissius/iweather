@@ -10,8 +10,6 @@ class Label;
 void InitLabelText(Label& label, HFONT font, const TCHAR* labelText,
     const PTSTR tipText=nullptr, const TCHAR* tipTitleText=nullptr);
 
-
-
 class Label {
 public:
     enum LabelType { Simple, WithTip };

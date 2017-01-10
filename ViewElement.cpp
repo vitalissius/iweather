@@ -196,3 +196,51 @@ LRESULT Combobox::SetText(const TCHAR* text) const
 {
     return SendMessage(m_handle, WM_SETTEXT, WPARAM(0), LPARAM(text));
 }
+
+
+
+Checkbox::Checkbox(Checkbox&& rhs)
+{
+    m_handle = rhs.m_handle;
+}
+
+Checkbox& Checkbox::operator=(Checkbox&& rhs)
+{
+    m_handle = rhs.m_handle;
+    return *this;
+}
+
+Checkbox::Checkbox(const HWND parentWindow, const RECT rect, const UINT id)
+{
+    HINSTANCE hInstance = HINSTANCE(GetWindowLong(parentWindow, GWL_HINSTANCE));
+
+    m_handle = CreateWindowEx(0, WC_BUTTON, NULL, WS_CHILD | WS_VISIBLE | WS_TABSTOP | BS_AUTOCHECKBOX,
+        rect.left, rect.top, rect.right, rect.bottom, parentWindow, HMENU(id), hInstance, NULL);
+}
+
+void Checkbox::Make(const HWND parentWindow, const RECT rect, const UINT id)
+{
+    *this = Checkbox(parentWindow, rect, id);
+}
+
+LRESULT Checkbox::SetFont(const HFONT hFont) const
+{
+    return SendMessage(m_handle, WM_SETFONT, WPARAM(hFont), TRUE);
+}
+
+LRESULT Checkbox::SetText(const TCHAR* text) const
+{
+    return SendMessage(m_handle, WM_SETTEXT, WPARAM(NULL), LPARAM(text));
+}
+
+LRESULT Checkbox::SetChecked(bool checked) const
+{
+    WPARAM wParam = checked == true ? BST_CHECKED : BST_UNCHECKED;
+    return SendMessage(m_handle, BM_SETCHECK, wParam, LPARAM(NULL));
+}
+
+bool Checkbox::IsChecked() const
+{
+    auto ret = SendMessage(m_handle, BM_GETCHECK, WPARAM(NULL), LPARAM(NULL));
+    return ret == BST_UNCHECKED ? false : true;
+}

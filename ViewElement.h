@@ -72,3 +72,22 @@ private:
     HWND m_handle{};
     UINT m_id{};
 };
+
+
+
+class Checkbox : private Noncopyable {
+public:
+    Checkbox() = default;
+    ~Checkbox() = default;
+    Checkbox(Checkbox&& rhs);
+    Checkbox& operator=(Checkbox&& rhs);
+    Checkbox(const HWND parentWindow, const RECT rect, const UINT id);
+    void Make(const HWND parentWindow, const RECT rect, const UINT id);
+    LRESULT SetFont(const HFONT hFont) const;
+    LRESULT SetText(const TCHAR* text) const;
+    LRESULT SetChecked(bool checked) const;
+    bool IsChecked() const;
+
+private:
+    HWND m_handle{};
+};

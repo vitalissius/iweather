@@ -3,6 +3,7 @@
 #include "Utility.h"
 
 #include <Windows.h>
+#include <windowsx.h>
 #include <CommCtrl.h>       // Must be included after including Windows.h
 
 #include <utility>
@@ -41,4 +42,33 @@ private:
     HWND m_tipHandle{};
     UINT m_tipId{};
     TOOLINFO m_tipToolInfo{};
+};
+
+
+
+class Combobox : private Noncopyable {
+private:
+    static constexpr std::size_t m_maxLength = 128;
+
+public:
+    Combobox() = default;
+    ~Combobox() = default;
+    Combobox(Combobox&& rhs);
+    Combobox& operator=(Combobox&& rhs);
+    Combobox(const HWND hWndParent, const RECT rect, const UINT id, const UINT additStyle=0);
+    void Make(const HWND hWndParent, const RECT rect, const UINT id, const UINT additStyle=0);
+    LRESULT SetFont(const HFONT hFont) const;
+    BOOL SetCueBannerText(const TCHAR* text) const;
+    BOOL IsEmpty() const;
+    int Clear() const;
+    LRESULT Add(const TCHAR* text) const;
+    BOOL ShowDropdown() const;
+    HWND GetHandle() const;
+    tstring GetText() const;
+    LRESULT SetText(const TCHAR* text) const;
+
+private:
+    HWND m_parent{};
+    HWND m_handle{};
+    UINT m_id{};
 };

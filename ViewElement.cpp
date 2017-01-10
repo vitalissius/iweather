@@ -107,3 +107,92 @@ Label::LabelType Label::GetLabelType() const
 {
     return m_type;
 }
+
+
+
+Combobox::Combobox(Combobox&& rhs)
+{
+    m_parent = rhs.m_parent;
+    m_handle = rhs.m_handle;
+    m_id = rhs.m_id;
+}
+
+Combobox& Combobox::operator=(Combobox&& rhs)
+{
+    m_parent = rhs.m_parent;
+    m_handle = rhs.m_handle;
+    m_id = rhs.m_id;
+    return *this;
+}
+
+Combobox::Combobox(const HWND hWndParent, const RECT rect, const UINT id, const UINT additStyle)
+    : m_parent(hWndParent)
+    , m_id(id)
+{
+    HINSTANCE hInstance = HINSTANCE(GetWindowLong(m_parent, GWL_HINSTANCE));
+
+    m_handle = CreateWindowEx(0, WC_COMBOBOX, NULL, WS_VISIBLE | WS_CHILD | CBS_HASSTRINGS | additStyle,
+        rect.left, rect.top, rect.right, rect.bottom, m_parent, HMENU(m_id), hInstance, NULL);
+}
+
+void Combobox::Make(const HWND hWndParent, const RECT rect, const UINT id, const UINT additStyle)
+{
+    *this = std::move(Combobox(hWndParent, rect, id, additStyle));
+}
+
+LRESULT Combobox::SetFont(const HFONT hFont) const
+{
+    return SendMessage(m_handle, WM_SETFONT, WPARAM(hFont), MAKELPARAM(TRUE, 0));
+}
+
+BOOL Combobox::SetCueBannerText(const TCHAR* text) const
+{
+    return ComboBox_SetCueBannerText(m_handle, text);
+}
+
+BOOL Combobox::IsEmpty() const
+{
+    return SendMessage(m_handle, CB_GETCOUNT, 0, 0) == CB_ERR;
+}
+
+int Combobox::Clear() const
+{
+    int num = SendMessage(m_handle, CB_GETCOUNT, 0, 0);
+    if (num != CB_ERR)
+    {
+        for (int ind = num - 1; ind >= 0; --ind)
+        {
+            SendMessage(m_handle, CB_DELETESTRING, WPARAM(ind), 0);
+        }
+    }
+    return num;
+}
+
+LRESULT Combobox::Add(const TCHAR* text) const
+{
+    return SendMessage(m_handle, CB_ADDSTRING, 0, LPARAM(text));
+}
+
+BOOL Combobox::ShowDropdown() const
+{
+    return ComboBox_ShowDropdown(m_handle, TRUE);
+}
+
+HWND Combobox::GetHandle() const
+{
+    return m_handle;
+}
+
+tstring Combobox::GetText() const
+{
+    int length = ComboBox_GetTextLength(m_handle) + 1;
+    tstring tszBuffer(length, '\0');
+    ComboBox_GetText(m_handle, &tszBuffer[0], length);
+    tszBuffer.pop_back();       // Remove Null sign in the end of the string
+    return tszBuffer;
+}
+
+LRESULT Combobox::SetText(const TCHAR* text) const
+{
+    return SendMessage(m_handle, WM_SETTEXT, WPARAM(0), LPARAM(text));
+}

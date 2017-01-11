@@ -91,3 +91,21 @@ public:
 private:
     HWND m_handle{};
 };
+
+
+
+class Button : private Noncopyable {
+public:
+    Button() = default;
+    ~Button() = default;
+    Button(Button&& rhs);
+    Button& operator=(Button&& rhs);
+    Button(const HWND hWndParent, const RECT rect, const UINT id);
+    void Make(const HWND hWndParent, const RECT rect, const UINT id);
+    LRESULT SetText(const TCHAR* text) const;
+    LRESULT SetFont(const HFONT hFont) const;
+    BOOL SetEnabled(const bool isEnabled) const;
+
+private:
+    HWND m_handle{};
+};

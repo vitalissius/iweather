@@ -244,3 +244,44 @@ bool Checkbox::IsChecked() const
     auto ret = SendMessage(m_handle, BM_GETCHECK, WPARAM(NULL), LPARAM(NULL));
     return ret == BST_UNCHECKED ? false : true;
 }
+
+
+
+Button::Button(Button&& rhs)
+{
+    m_handle = rhs.m_handle;
+}
+
+Button& Button::operator=(Button&& rhs)
+{
+    m_handle = rhs.m_handle;
+    return *this;
+}
+
+Button::Button(const HWND hWndParent, const RECT rect, const UINT id)
+{
+    HINSTANCE hInstance = HINSTANCE(GetWindowLong(hWndParent, GWL_HINSTANCE));
+
+    m_handle = CreateWindowEx(0, WC_BUTTON, NULL, WS_CHILD | WS_VISIBLE | WS_TABSTOP,
+        rect.left, rect.top, rect.right, rect.bottom, hWndParent, HMENU(id), hInstance, NULL);
+}
+
+void Button::Make(const HWND hWndParent, const RECT rect, const UINT id)
+{
+    *this = Button(hWndParent, rect, id);
+}
+
+LRESULT Button::SetText(const TCHAR* text) const
+{
+    return SendMessage(m_handle, WM_SETTEXT, WPARAM(NULL), LPARAM(text));
+}
+
+LRESULT Button::SetFont(const HFONT hFont) const
+{
+    return SendMessage(m_handle, WM_SETFONT, WPARAM(hFont), MAKELPARAM(TRUE, 0));
+}
+
+BOOL Button::SetEnabled(const bool isEnabled) const
+{
+    return EnableWindow(m_handle, isEnabled);
+}

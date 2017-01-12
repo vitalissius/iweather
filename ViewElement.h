@@ -135,3 +135,20 @@ private:
     HWND m_parent{};
     HWND m_handle{};
 };
+
+
+
+class EdgeView : private Noncopyable {
+public:
+    EdgeView() = default;
+    ~EdgeView() = default;
+    EdgeView(EdgeView&& rhs);
+    EdgeView& operator=(EdgeView&& rhs);
+    EdgeView(const HWND hWndParent, const RECT rect, const UINT id=-1);
+    void Make(const HWND hWndParent, const RECT rect, const UINT id=-1);
+    LRESULT SetFont(const HFONT hFont) const;
+    LRESULT SetText(const TCHAR* text) const;
+
+private:
+    HWND m_handle{};
+};

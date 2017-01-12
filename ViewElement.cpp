@@ -345,3 +345,39 @@ LRESULT Trackbar::GetTrackPosition() const
 {
     return SendMessage(m_handle, TBM_GETPOS, WPARAM(NULL), LPARAM(NULL));
 }
+
+
+
+EdgeView::EdgeView(EdgeView&& rhs)
+{
+    m_handle = rhs.m_handle;
+}
+
+EdgeView& EdgeView::operator=(EdgeView&& rhs)
+{
+    m_handle = rhs.m_handle;
+    return *this;
+}
+
+EdgeView::EdgeView(const HWND hWndParent, const RECT rect, const UINT id)
+{
+    HINSTANCE hInstance = HINSTANCE(GetWindowLong(hWndParent, GWL_HINSTANCE));
+
+    m_handle = CreateWindowEx(WS_EX_WINDOWEDGE, WC_BUTTON, NULL, WS_VISIBLE | WS_CHILD | BS_GROUPBOX,
+        rect.left, rect.top, rect.right, rect.bottom, hWndParent, HMENU(id), hInstance, NULL);
+}
+
+void EdgeView::Make(const HWND hWndParent, const RECT rect, const UINT id)
+{
+    *this = EdgeView(hWndParent, rect, id);
+}
+
+LRESULT EdgeView::SetFont(const HFONT hFont) const
+{
+    return SendMessage(m_handle, WM_SETFONT, WPARAM(hFont), MAKELPARAM(TRUE, 0));
+}
+
+LRESULT EdgeView::SetText(const TCHAR* text) const
+{
+    return SendMessage(m_handle, WM_SETTEXT, WPARAM(0), LPARAM(text));
+}

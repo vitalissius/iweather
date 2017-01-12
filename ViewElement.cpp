@@ -285,3 +285,63 @@ BOOL Button::SetEnabled(const bool isEnabled) const
 {
     return EnableWindow(m_handle, isEnabled);
 }
+
+
+
+Trackbar::Trackbar(Trackbar&& rhs)
+{
+    m_parent = rhs.m_parent;
+    m_handle = rhs.m_handle;
+}
+
+Trackbar& Trackbar::operator=(Trackbar&& rhs)
+{
+    m_parent = rhs.m_parent;
+    m_handle = rhs.m_handle;
+    return *this;
+}
+
+Trackbar::Trackbar(const HWND hWndParent, const RECT rect, const UINT id, const UINT additStyle)
+    : m_parent(hWndParent)
+{
+    HINSTANCE hInstance = HINSTANCE(GetWindowLong(m_parent, GWL_HINSTANCE));
+
+    m_handle = CreateWindowEx(0, TRACKBAR_CLASS, NULL, WS_CHILD | WS_VISIBLE | additStyle,
+        rect.left, rect.top, rect.right, rect.bottom, m_parent, (HMENU)id, hInstance, NULL);
+}
+
+void Trackbar::Make(const HWND hWndParent, const RECT rect, const UINT id, const UINT additStyle)
+{
+    *this = Trackbar(hWndParent, rect, id, additStyle);
+}
+
+void Trackbar::SetBuddy(const RECT rect, const BuddyLocation buddy,
+    const TCHAR* text, const BuddyTextAlignment bta, const HFONT hfont) const
+{
+    HINSTANCE hInstance = HINSTANCE(GetWindowLong(m_parent, GWL_HINSTANCE));
+
+    HWND hWndBuddy = CreateWindowEx(0, WC_STATIC, text, UINT(bta) | WS_CHILD | WS_VISIBLE,
+        rect.left, rect.top, rect.right, rect.bottom, m_parent, NULL, hInstance, NULL);
+    SendMessage(m_handle, TBM_SETBUDDY, WPARAM(buddy), LPARAM(hWndBuddy));
+    SendMessage(hWndBuddy, WM_SETFONT, WPARAM(hfont), TRUE);
+}
+
+void Trackbar::SetRange(const int min, const int max, const BOOL redraw) const
+{
+    SendMessage(m_handle, TBM_SETRANGE, WPARAM(redraw), LPARAM(MAKELONG(min, max)));
+}
+
+void Trackbar::SetTicFrequency(const UINT interval) const
+{
+    SendMessage(m_handle, TBM_SETTICFREQ, WPARAM(interval), LPARAM(NULL));
+}
+
+void Trackbar::SetTrackPosition(const int position) const
+{
+    SendMessage(m_handle, TBM_SETPOS, WPARAM(TRUE), position);
+}
+
+LRESULT Trackbar::GetTrackPosition() const
+{
+    return SendMessage(m_handle, TBM_GETPOS, WPARAM(NULL), LPARAM(NULL));
+}

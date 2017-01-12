@@ -109,3 +109,29 @@ public:
 private:
     HWND m_handle{};
 };
+
+
+
+class Trackbar : private Noncopyable {
+public:
+    enum class BuddyLocation { Right = FALSE, Left = TRUE };
+    enum class BuddyTextAlignment { Left = SS_LEFT, Center = SS_CENTER, Right = SS_RIGHT };
+
+public:
+    Trackbar() = default;
+    ~Trackbar() = default;
+    Trackbar(Trackbar&& rhs);
+    Trackbar& operator=(Trackbar&& rhs);
+    Trackbar(const HWND hWndParent, const RECT rect, const UINT id, const UINT additStyle);
+    void Make(const HWND hWndParent, const RECT rect, const UINT id, const UINT additStyle);
+    void SetBuddy(const RECT rect, const BuddyLocation buddy,
+        const TCHAR* text, const BuddyTextAlignment bta, const HFONT hfont) const;
+    void SetRange(const int min, const int max, const BOOL redraw=TRUE) const;
+    void SetTicFrequency(const UINT interval) const;
+    void SetTrackPosition(const int position) const;
+    LRESULT GetTrackPosition() const;
+
+private:
+    HWND m_parent{};
+    HWND m_handle{};
+};

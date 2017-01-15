@@ -197,6 +197,11 @@ LRESULT Combobox::SetText(const TCHAR* text) const
     return SendMessage(m_handle, WM_SETTEXT, WPARAM(0), LPARAM(text));
 }
 
+int Combobox::SetSelection(const int index) const
+{
+    return ComboBox_SetCurSel(m_handle, index);
+}
+
 
 
 Checkbox::Checkbox(Checkbox&& rhs)

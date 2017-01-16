@@ -1,20 +1,27 @@
 #pragma once
 
 #include "Enumerators.h"
+#include "Utility.h"
 
 #include <map>
 #include <vector>
 #include <string>
 
-class LanguagePack final {
+class LanguagePack final : private Noncopyable {
 public:
     /* Enums */
     enum Keys { KEY_PRESSURE, KEY_SPEED, KEY_TEMPERATURE, KEY_PRESSURESTATE, KEY_COMPASSROSE };
     enum class LanguageUnits : char { ENG, RUS };
 
+private:
+    explicit LanguagePack(LanguageUnits langUnit=LanguageUnits::ENG);
+
 public:
+    LanguagePack(LanguagePack&&) = default;
+    LanguagePack& operator=(LanguagePack&&) = default;
+
     /* Methods */
-    explicit LanguagePack(LanguageUnits language = LanguageUnits::ENG);
+    static LanguagePack& Instance();
 
     void SetLanguageUnit(LanguageUnits language);
     void SetPressureUnit(units::PressureUnits pressure);

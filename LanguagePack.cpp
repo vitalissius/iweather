@@ -10,6 +10,12 @@ LanguagePack::LanguagePack(LanguageUnits language)
 
 
 
+LanguagePack& LanguagePack::Instance()
+{
+    static LanguagePack langPack;
+    return langPack;
+}
+
 void LanguagePack::SetLanguageUnit(LanguageUnits languageUnit)
 {
     m_languageUnit = languageUnit;

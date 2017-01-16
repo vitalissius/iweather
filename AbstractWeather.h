@@ -88,7 +88,7 @@ private:
     Atmosphere m_atmosphere;
     Wind m_wind;
     std::string m_pubDate;
-    LanguagePack m_langPack;
+    LanguagePack& m_langPack = LanguagePack::Instance();
 
 protected:
     /* AbstractWeather's private constant static member */

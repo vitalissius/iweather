@@ -202,6 +202,11 @@ int Combobox::SetSelection(const int index) const
     return ComboBox_SetCurSel(m_handle, index);
 }
 
+int Combobox::GetSelection() const
+{
+    return ComboBox_GetCurSel(m_handle);
+}
+
 
 
 Checkbox::Checkbox(Checkbox&& rhs)

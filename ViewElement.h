@@ -67,6 +67,7 @@ public:
     tstring GetText() const;
     LRESULT SetText(const TCHAR* text) const;
     int SetSelection(const int index) const;
+    int GetSelection() const;
 
 private:
     HWND m_parent{};

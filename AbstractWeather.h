@@ -10,6 +10,8 @@
 #include <regex>
 #include <sstream>
 
+int temperatureTo(const int temp, units::TemperatureUnits tempUnit);
+
 class AbstractWeather {
 private:
     /* Additional private structures */
@@ -88,7 +90,7 @@ private:
     Atmosphere m_atmosphere;
     Wind m_wind;
     std::string m_pubDate;
-    LanguagePack& m_langPack = LanguagePack::Instance();
+    static LanguagePack& m_langPack;
 
 protected:
     /* AbstractWeather's private constant static member */
@@ -192,6 +194,7 @@ public:
     /* AbstractWeather's "changeror" methods */
     void ChangeSpeedUnitTo(units::SpeedUnits speedUnit);
     void ChangePressureUnitTo(units::PressureUnits pressureUnit);
+    void ChangeTemperatureUnitTo(units::TemperatureUnits temperatureUnit);
     void ChangeLanguageTo(LanguagePack::LanguageUnits languageUnit);
 
     void ChangeClockSystemTo24h();

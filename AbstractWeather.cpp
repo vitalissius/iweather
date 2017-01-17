@@ -1,5 +1,13 @@
 #include "AbstractWeather.h"
 
+LanguagePack& AbstractWeather::m_langPack = LanguagePack::Instance();
+
+int temperatureTo(const int temp, units::TemperatureUnits tempUnit)
+{
+    if (tempUnit == units::TemperatureUnits::TU_CELSIUS) { return temp; }
+    else { return int(temp * 1.8f + 32); }
+}
+
 /* Methods of the Astronomy additional private structure */
 
 AbstractWeather::Astronomy::Astronomy(const char* sunrise, const char* sunset)
@@ -132,12 +140,12 @@ const std::string& AbstractWeather::Forecast::GetDayName() const
 
 int AbstractWeather::Forecast::GetHighTemp() const 
 { 
-    return m_high;
+    return temperatureTo(m_high, m_langPack.GetTemperatureUnit());
 }
 
 int AbstractWeather::Forecast::GetLowTemp() const
 {
-    return m_low;
+    return temperatureTo(m_low, m_langPack.GetTemperatureUnit());
 }
 
 const std::string AbstractWeather::Forecast::GetDescriptionText() const
@@ -184,7 +192,7 @@ void AbstractWeather::SetLocation(const char* city, const char* country, const c
 void AbstractWeather::SetCondition(int code, int temp, const char* text)
 {
     m_condition.m_code = code;
-    m_condition.m_temp = temp;
+    m_condition.m_temp = temperatureTo(temp, m_langPack.GetTemperatureUnit());
     m_condition.m_text = text;
 }
 
@@ -353,6 +361,11 @@ void AbstractWeather::ChangeSpeedUnitTo(units::SpeedUnits speedUnit)
 void AbstractWeather::ChangePressureUnitTo(units::PressureUnits pressureUnit)
 {
     m_langPack.SetPressureUnit(pressureUnit);
+}
+
+void AbstractWeather::ChangeTemperatureUnitTo(units::TemperatureUnits temperatureUnit)
+{
+    m_langPack.SetTemperatureUnit(temperatureUnit);
 }
 
 void AbstractWeather::ChangeLanguageTo(LanguagePack::LanguageUnits languageUnit)

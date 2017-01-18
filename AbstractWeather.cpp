@@ -192,7 +192,7 @@ void AbstractWeather::SetLocation(const char* city, const char* country, const c
 void AbstractWeather::SetCondition(int code, int temp, const char* text)
 {
     m_condition.m_code = code;
-    m_condition.m_temp = temperatureTo(temp, m_langPack.GetTemperatureUnit());
+    m_condition.m_temp = temp;
     m_condition.m_text = text;
 }
 
@@ -235,7 +235,7 @@ int AbstractWeather::GetConditionCode() const
 
 int AbstractWeather::GetConditionTemt() const
 {
-    return m_condition.m_temp;
+    return temperatureTo(m_condition.m_temp, m_langPack.GetTemperatureUnit());
 }
 
 const std::string& AbstractWeather::GetConditionText() const

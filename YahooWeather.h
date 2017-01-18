@@ -7,7 +7,7 @@
 
 #include <codecvt>
 #include <locale>
-#include <map>
+#include <vector>
 #include <iterator>
 #include <iostream>
 
@@ -26,7 +26,10 @@ std::string downloadData(const std::string& value, const Table table);
 
 
 class Places {
-    using WoeidPlaceMap = std::map<std::string, std::string>;
+    struct Place {
+        std::string woeid;
+        std::string place;
+    };
 
 private:
     Places() = default;
@@ -42,11 +45,9 @@ public:
     void Update(const char* place);
     std::string GetWoeid(const std::string& place) const;
 
-    WoeidPlaceMap::const_iterator begin() const;
-    WoeidPlaceMap::const_iterator end() const;
+    std::vector<Place>::const_iterator begin() const;
+    std::vector<Place>::const_iterator end() const;
     std::size_t size() const;
-    const WoeidPlaceMap::key_type& at(std::string value) const;
-    WoeidPlaceMap::const_iterator find(std::string value) const;
 
 private:
     void parseXmlData(std::string xmlPage);
@@ -54,7 +55,7 @@ private:
     std::string makePlace(const char* pszTown, const char* pszCountry, const char* pszRegion);
 
 private:
-    WoeidPlaceMap m_places;
+    std::vector<Place> m_places;
 
 private:
     static const std::locale currLocale;

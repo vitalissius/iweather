@@ -90,20 +90,20 @@ void Places::Update(const char* place)
 
 std::string Places::GetWoeid(const std::string& place) const
 {
-    for (auto e : m_places)
+    for (const auto& e : m_places)
     {
-        if (e.second == place)
-            return e.first;
+        if (e.place == place)
+            return e.woeid;
     }
     return "";
 }
 
-Places::WoeidPlaceMap::const_iterator Places::begin() const
+std::vector<Places::Place>::const_iterator Places::begin() const
 {
     return m_places.begin();
 }
 
-Places::WoeidPlaceMap::const_iterator Places::end() const
+std::vector<Places::Place>::const_iterator Places::end() const
 {
     return m_places.end();
 }
@@ -111,16 +111,6 @@ Places::WoeidPlaceMap::const_iterator Places::end() const
 std::size_t Places::size() const
 {
     return m_places.size();
-}
-
-const Places::WoeidPlaceMap::key_type& Places::at(std::string value) const
-{
-    return m_places.at(value);
-}
-
-Places::WoeidPlaceMap::const_iterator Places::find(std::string value) const
-{
-    return m_places.find(value);
 }
 
 void Places::parseXmlData(std::string xmlPage)
@@ -152,7 +142,7 @@ void Places::parseXmlData(std::string xmlPage)
             const char* pszTown = peData->NextSiblingElement("locality1")->GetText();
 
             auto place = makePlace(pszTown, pszCountry, pszRegion);
-            m_places.emplace(pszWoeid, correctCharacterEncoding(std::move(place)));
+            m_places.push_back(Places::Place{ pszWoeid, correctCharacterEncoding(std::move(place)) });
 
             pePlace = pePlace->NextSiblingElement("place");
         }

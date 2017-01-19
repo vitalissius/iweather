@@ -293,7 +293,9 @@ LRESULT Button::SetFont(const HFONT hFont) const
 
 BOOL Button::SetEnabled(const bool isEnabled) const
 {
-    return EnableWindow(m_handle, isEnabled);
+    BOOL ret = EnableWindow(m_handle, isEnabled);
+    SetFocus(GetParent(m_handle));
+    return ret;
 }
 
 

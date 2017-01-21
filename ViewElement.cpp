@@ -298,6 +298,11 @@ BOOL Button::SetEnabled(const bool isEnabled) const
     return ret;
 }
 
+BOOL Button::IsDisabled() const
+{
+    return GetWindowLong(m_handle, GWL_STYLE) & WS_DISABLED;
+}
+
 
 
 Trackbar::Trackbar(Trackbar&& rhs)

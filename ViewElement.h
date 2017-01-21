@@ -107,6 +107,7 @@ public:
     LRESULT SetText(const TCHAR* text) const;
     LRESULT SetFont(const HFONT hFont) const;
     BOOL SetEnabled(const bool isEnabled) const;
+    BOOL IsDisabled() const;
 
 private:
     HWND m_handle{};

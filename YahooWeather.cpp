@@ -70,6 +70,36 @@ std::string downloadData(const std::string& value, const Table table)
     return xmlPage;
 }
 
+std::string downloadData_stab()
+{
+    return{
+R"__(
+<?xml version="1.0" encoding="UTF-8"?>
+<query yahoo:lang="" yahoo:created="" yahoo:count="1" xmlns:yahoo="">
+    <results>
+        <channel>
+            <yweather:units temperature="" speed="" pressure="" distance="" xmlns:yweather=""/>
+            <lastBuildDate>n/a</lastBuildDate>
+            <yweather:location xmlns:yweather="" region="n/a" country="n/a" city="n/a"/>
+            <yweather:wind speed="0.0" xmlns:yweather="" direction="0" chill="0"/>
+            <yweather:atmosphere pressure="0.0" xmlns:yweather="" visibility="0.0" rising="0" humidity="0"/>
+            <yweather:astronomy xmlns:yweather="" sunset="0:00 pm" sunrise="0:00 am"/>
+            <item>
+                <title>n/a</title>
+                <pubDate>n/a</pubDate>
+                <yweather:condition xmlns:yweather="" text="n/a" temp="0" date="n/a" code="48"/>
+                <yweather:forecast xmlns:yweather="" text="n/a" date="n/a" code="48" low="0" high="0" day="n/a"/>
+                <yweather:forecast xmlns:yweather="" text="n/a" date="n/a" code="48" low="0" high="0" day="n/a"/>
+                <yweather:forecast xmlns:yweather="" text="n/a" date="n/a" code="48" low="0" high="0" day="n/a"/>
+                <yweather:forecast xmlns:yweather="" text="n/a" date="n/a" code="48" low="0" high="0" day="n/a"/>
+                <yweather:forecast xmlns:yweather="" text="n/a" date="n/a" code="48" low="0" high="0" day="n/a"/>
+            </item>
+        </channel>
+    </results>
+</query>
+)__" };
+}
+
 
 
 Places& Places::CreateInstance()
@@ -199,11 +229,10 @@ std::string Places::makePlace(const char* pszTown, const char* pszCountry, const
 
 void YahooWeather::Update(const std::string& woeid)
 {
-    const std::string page = downloadData(woeid, ::Table::WEATHER_FORECAST);
+    std::string page = downloadData(woeid, ::Table::WEATHER_FORECAST);
     if (page.size() < 3000u)
     {
-        // If XML page does not contains complete data - do not update status
-        return;
+        page = downloadData_stab();
     }
     tinyxml2::XMLDocument document;
     document.Parse(page.data(), page.size());

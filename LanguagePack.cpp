@@ -114,7 +114,7 @@ const std::map<LanguagePack::Keys, std::vector<std::string>> LanguagePack::csm_r
     std::make_pair<Keys, std::vector<std::string>>(KEY_PRESSURE,{ "атм", "мм рт.ст.", "мбар", "дюйм рт.ст." }),
     std::make_pair<Keys, std::vector<std::string>>(KEY_SPEED,{ "км/ч", "м/с", "миль/ч", "фт/с" }),
     std::make_pair<Keys, std::vector<std::string>>(KEY_TEMPERATURE,{ "C", "F" }),
-    std::make_pair<Keys, std::vector<std::string>>(KEY_PRESSURESTATE,{ "Неуклонное", "Поднимающееся", "Понижающееся" }),
+    std::make_pair<Keys, std::vector<std::string>>(KEY_PRESSURESTATE,{ "Постоянное", "Повышается", "Понижается" }),
     std::make_pair<Keys, std::vector<std::string>>(KEY_COMPASSROSE,{
         "Северный",     "Северо-северо-восточный",      "Северо-восточный",     "Востоко-северо-восточный",
         "Восточный",    "Востоко-юго-восточный",       "Юго-восточный",        "Юго-юго-восточный",

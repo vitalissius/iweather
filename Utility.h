@@ -2,6 +2,7 @@
 
 #include <tchar.h>
 
+#include <codecvt>
 #include <string>
 #include <sstream>
 
@@ -19,15 +20,16 @@ tstring to_tstring(T t)
 #endif
 }
 
+std::string utf8ToCp1251(const std::string& from, const std::locale& loc=std::locale(""));
+
+std::string trim(std::string str);
+
 
 
 class Noncopyable {
 protected:
     Noncopyable() = default;
-
     ~Noncopyable() = default;
-
     Noncopyable(const Noncopyable&) = delete;
-
     Noncopyable& operator=(const Noncopyable&) = delete;
 };

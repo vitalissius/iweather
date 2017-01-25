@@ -90,6 +90,8 @@ private:
     Atmosphere m_atmosphere;
     Wind m_wind;
     std::string m_pubDate;
+
+protected:
     static LanguagePack& m_langPack;
 
 protected:

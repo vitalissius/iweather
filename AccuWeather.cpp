@@ -153,9 +153,14 @@ void AccuWeather::updateForecast(const Json::Value& root)
 
         auto dphrase = iroot["Day"]["IconPhrase"].asString();
         auto nphrase = iroot["Night"]["IconPhrase"].asString();
-        auto text = utf8ToCp1251((dphrase += " / ") += nphrase);
+        int diff = nphrase.size() - dphrase.size();
+        if (diff > 0)
+        {
+            dphrase.append(diff * 2, ' ');
+        }
+        auto text = utf8ToCp1251((dphrase += '\n') += nphrase);
 
-        AddForecast(code, std::move(date), std::move(dayname), high, low, std::move(text));
+        AddForecast(code, std::move(text), std::move(dayname), high, low, std::move(date));
     }
 }
 

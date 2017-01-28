@@ -22,10 +22,12 @@ void LanguagePack::SetLanguageUnit(LanguageUnits languageUnit)
     switch (m_languageUnit)
     {
         case LanguageUnits::ENG:
+            std::locale::global(std::locale("eng_us.1251"));
             m_pack = &csm_engPack;
             break;
 
         case LanguageUnits::RUS:
+            std::locale::global(std::locale("rus_rus.1251"));
             m_pack = &csm_rusPack;
             break;
     }

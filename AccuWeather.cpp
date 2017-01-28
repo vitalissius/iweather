@@ -60,11 +60,11 @@ void AccuWeather::updateLocation(const Json::Value& root)
 void AccuWeather::updatePublicationDate(const Json::Value& root)
 {
     const auto epochTime = root[0]["EpochTime"].asInt64();
-    char buffer[26];
-    tm time{};
+    char buffer[40];
+    tm time;
     localtime_s(&time, &epochTime);
-    asctime_s(buffer, sizeof(buffer), &time);
-    buffer[strlen(buffer) - 1] = '\0';
+    strftime(buffer, sizeof(buffer), "%e %b %Y (%A) %r", &time);
+
     SetPublicationDate(buffer);
 }
 
@@ -132,12 +132,12 @@ void AccuWeather::updateForecast(const Json::Value& root)
 
         auto epochTime = iroot["EpochDate"].asInt64();
         tm time;
-        char buffer[26];
+        char buffer[16];
         localtime_s(&time, &epochTime);
-        asctime_s(buffer, sizeof(buffer), &time);
+        strftime(buffer, sizeof(buffer), "%a %b %d %Y", &time);
 
         std::cmatch res;
-        std::regex rgx("(...) (...) (..) .+ (....)");           // "Fri Jan 27 07:00:00 2017"
+        std::regex rgx("(.{2,3}) (...) (..) (....)");           // "Fri Jan 27 2017"
         std::regex_search(buffer, res, rgx);
 
         std::string dayname = res[1];

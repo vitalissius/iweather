@@ -34,6 +34,14 @@ std::string makePath(const DataResource resource, const std::string& value,
             path += langs.at(langUnit);
         }
     }
+
+    size_t pos = path.find(' ');
+    while (pos != std::string::npos)
+    {
+        path.replace(pos, 1, "%20");
+        pos = path.find(' ');
+    }
+
     return path;
 }
 

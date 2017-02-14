@@ -1,9 +1,9 @@
 #pragma once
 
 #include "ContextMenu.h"
-#include "LanguagePack.h"
+#include "core/LanguagePack.h"
 #include "Resource.h"
-#include "Utility.h"
+#include "core/Utility.h"
 
 #include <strsafe.h>
 #include <Windows.h>

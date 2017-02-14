@@ -2,7 +2,7 @@
 
 #include "Settings.h"
 #include "ViewTools.h"
-#include "Utility.h"
+#include "core/Utility.h"
 #include "Resource.h"
 
 #include <Windows.h>

@@ -162,8 +162,6 @@ AbstractWeather::AbstractWeather()
     m_forecast.reserve(msc_forecastSize);
 }
 
-AbstractWeather::~AbstractWeather() = default;
-
 
 
 /* AbstractWeather's mutator methods */

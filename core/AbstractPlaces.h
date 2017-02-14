@@ -20,6 +20,7 @@ protected:
 
 public:
     AbstractPlaces(AbstractPlaces&&) = default;
+    virtual ~AbstractPlaces() = default;
     AbstractPlaces& operator=(AbstractPlaces&&) = default;
     std::vector<Place>::const_iterator begin() const;
     std::vector<Place>::const_iterator end() const;

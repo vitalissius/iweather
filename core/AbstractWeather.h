@@ -103,7 +103,7 @@ protected:
     AbstractWeather();
 
 public:
-    virtual ~AbstractWeather() = 0;
+    virtual ~AbstractWeather() = default;
 
     /* AbstractWeather's mutator methods */
     //@description: The weather forecast for a specific day

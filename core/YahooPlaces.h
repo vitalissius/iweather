@@ -15,7 +15,7 @@ public:
     static YahooPlaces* Instance();
 
 public:
-    void Update(const std::string& place, const LanguagePack::LanguageUnits lang) override;
+    void Update(const std::string& place) override;
 
 private:
     void parse(std::string page) override;

@@ -6,14 +6,14 @@ AccuPlaces* AccuPlaces::Instance()
     return &places;
 }
 
-void AccuPlaces::Update(const std::string& place, const LanguagePack::LanguageUnits lang)
+void AccuPlaces::Update(const std::string& place)
 {
     if (!m_places.empty())
     {
         m_places.clear();
     }
     std::string page = downloadData("dataservice.accuweather.com", place,
-        DataResource::ACCU_LOCATIONS, lang);
+        DataResource::ACCU_LOCATIONS);
     parse(std::move(page));
 }
 

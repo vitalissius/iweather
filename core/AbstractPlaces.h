@@ -28,8 +28,7 @@ public:
     std::string GetKey(const std::string& place) const;
 
 public:
-    virtual void Update(const std::string& place,
-        const LanguagePack::LanguageUnits lang=LanguagePack::LanguageUnits::ENG) = 0;
+    virtual void Update(const std::string& place) = 0;
 
 private:
     virtual void parse(std::string page) = 0;

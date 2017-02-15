@@ -6,14 +6,14 @@ YahooPlaces* YahooPlaces::Instance()
     return &places;
 }
 
-void YahooPlaces::Update(const std::string& place, const LanguagePack::LanguageUnits lang)
+void YahooPlaces::Update(const std::string& place)
 {
     if (!m_places.empty())
     {
         m_places.clear();
     }
 
-    std::string page = downloadData("query.yahooapis.com", place, DataResource::YAHOO_GEO_PLACES, lang);
+    std::string page = downloadData("query.yahooapis.com", place, DataResource::YAHOO_GEO_PLACES);
     parse(std::move(page));
 }
 

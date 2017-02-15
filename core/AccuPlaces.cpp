@@ -49,6 +49,6 @@ void AccuPlaces::parse(std::string page)
 std::string AccuPlaces::makePlace(std::string type, std::string name, std::string country, std::string area)
 {
     std::stringstream place;
-    place << type << ": " << name << " " << country << " (" << area << ")";
+    place << type << ": " << name << ", " << country << " (" << area << ")";
     return place.str();
 }

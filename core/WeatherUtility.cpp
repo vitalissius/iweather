@@ -53,7 +53,7 @@ std::string downloadData(const char* host, const std::string& value, const DataR
     ios.connect(host, "http");
     if (!ios)
     {
-        throw std::exception(ios.error().message().data());
+        throw NetworkError(ios.error().message().data());
     }
 
     ios << "GET " << makePath(resource, value, langUnit) << " HTTP/1.0\r\n";

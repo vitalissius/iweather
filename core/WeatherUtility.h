@@ -1,6 +1,7 @@
 #pragma once
 
 #include "LanguagePack.h"
+#include "Exceptions.h"
 
 #include <boost/asio.hpp>
 

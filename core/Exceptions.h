@@ -26,9 +26,9 @@ public:
     {}
 };
 
-class SocketError : public WeatherException {
+class NetworkError : public WeatherException {
 public:
-    SocketError(const char* message)
+    NetworkError(const char* message)
         : WeatherException(message)
     {}
 };

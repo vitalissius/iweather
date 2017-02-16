@@ -61,7 +61,7 @@ void IconNotifier::Modify(const TCHAR* const textInfo, const TCHAR* const textIn
     if (hIcon) { DestroyIcon(hIcon); }
 }
 
-void IconNotifier::ShowMenu(const LanguagePack::LanguageUnits langUnit, const bool pin, const bool forecast)
+void IconNotifier::ShowMenu(const bool pin, const bool forecast)
 {
     ContextMenu cmenu(m_handle);
     cmenu.Show(pin, forecast);

@@ -24,7 +24,7 @@ public:
     void SetSound(IconNotifier::Sound sound);
     void Modify(const TCHAR* const textInfo, const TCHAR* const textInfoTitle,
         const TCHAR* const textTip, const UINT iconId);
-    void ShowMenu(const LanguagePack::LanguageUnits langUnit, const bool pin, const bool forecast);
+    void ShowMenu(const bool pin, const bool forecast);
 
 private:
     void updateText(TCHAR* const dest, const std::size_t destSize, const TCHAR* const src);

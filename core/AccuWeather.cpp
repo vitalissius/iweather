@@ -160,7 +160,7 @@ void AccuWeather::updateForecast(const Json::Value& root)
         }
         auto text = utf8ToCp1251((dphrase += '\n') += nphrase);
 
-        AddForecast(code, std::move(text), std::move(dayname), high, low, std::move(date));
+        AddForecast(code, std::move(date), std::move(dayname), high, low, std::move(text));
     }
 }
 

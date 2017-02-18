@@ -16,4 +16,6 @@ namespace units {
         CRU_SOUTH, CRU_SOUTHSOUTHWEST, CRU_SOUTHWEST, CRU_WESTSOUTHWEST,
         CRU_WEST, CRU_WESTNORTHWEST, CRU_NORTHWEST, CRU_NORTHNORTHWEST
 	};
+
+    enum class WeatherProvider : char { Yahoo, Accuweather };
 }

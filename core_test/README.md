@@ -94,7 +94,7 @@ std::string choosePlace(const AbstractPlaces* places)
 {
     for (size_t i = 0; i < places->size(); ++i)
     {
-        std::cout << i << ") " << (places->begin() + i)->place << "\n";
+        std::cout << i << ") " << places->at(i).place << "\n";
     }
 
     std::cout << "\nChoose place (index): ";

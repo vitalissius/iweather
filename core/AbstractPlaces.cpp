@@ -20,6 +20,11 @@ std::vector<AbstractPlaces::Place>::size_type AbstractPlaces::size() const
     return m_places.size();
 }
 
+const AbstractPlaces::Place& AbstractPlaces::at(size_t pos) const
+{
+    return m_places.at(pos);
+}
+
 std::string AbstractPlaces::GetKey(const std::string& place) const
 {
     auto it = std::find_if(m_places.begin(), m_places.end(), [&place](const Place& e)

@@ -25,6 +25,7 @@ public:
     std::vector<Place>::const_iterator begin() const;
     std::vector<Place>::const_iterator end() const;
     std::vector<Place>::size_type size() const;
+    const Place& at(size_t pos) const;
     std::string GetKey(const std::string& place) const;
 
 public:

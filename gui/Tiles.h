@@ -2,8 +2,8 @@
 
 #include "Settings.h"
 #include "ViewTools.h"
-#include "core/Utility.h"
 #include "Resource.h"
+#include "../core/Utility.h"
 
 #include <Windows.h>
 #include <Windowsx.h>

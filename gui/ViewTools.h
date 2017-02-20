@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/Utility.h"
+#include "../core/Utility.h"
 
 #include <Shlobj.h>
 #include <Windowsx.h>

@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GuiLang.h"
-#include "core/LanguagePack.h"
+#include "../core/LanguagePack.h"
 #include "Resource.h"
 
 class ContextMenu : private Noncopyable {

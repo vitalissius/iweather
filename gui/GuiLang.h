@@ -1,8 +1,8 @@
 #pragma once
 
-#include "core/LanguagePack.h"
 #include "Resource.h"
-#include "core/Utility.h"
+#include "../core/LanguagePack.h"
+#include "../core/Utility.h"
 
 #include <Windows.h>
 

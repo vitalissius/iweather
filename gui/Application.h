@@ -2,7 +2,7 @@
 #ifndef APPLICATION_H
 #define APPLICATION_H
 
-#include "core/Utility.h"
+#include "../core/Utility.h"
 
 #include <Windows.h>
 

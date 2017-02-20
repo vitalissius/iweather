@@ -1,6 +1,6 @@
 #pragma once
 
-#include "core/Utility.h"
+#include "../core/Utility.h"
 
 #include <Windows.h>
 #include <gdiplus.h>

@@ -3,7 +3,7 @@
 #include "Enumerators.h"
 #include "Utility.h"
 
-#include <map>
+#include <unordered_map>
 #include <vector>
 #include <string>
 
@@ -41,8 +41,8 @@ public:
 
 private:
     /* Private const static members */
-    static const std::map<Keys, std::vector<std::string>> csm_engPack;
-    static const std::map<Keys, std::vector<std::string>> csm_rusPack;
+    static const std::unordered_map<Keys, std::vector<std::string>> csm_engPack;
+    static const std::unordered_map<Keys, std::vector<std::string>> csm_rusPack;
 
 public:
     /* Public const static member */
@@ -50,7 +50,7 @@ public:
 
 private:
     /* Private members */
-	const std::map<Keys, std::vector<std::string>>* m_pack;     // 4 bytes
+	const std::unordered_map<Keys, std::vector<std::string>>* m_pack;     // 4 bytes
     LanguageUnits m_languageUnit;                               // 1 byte
 	units::PressureUnits m_pressureUnit;                 // 1 byte
 	units::SpeedUnits m_speedUnit;                       // 1 byte

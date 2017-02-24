@@ -6,7 +6,7 @@
 
 #include <Windows.h>
 
-#include <map>
+#include <unordered_map>
 #include <set>
 
 class GuiLang : private Noncopyable {
@@ -33,6 +33,6 @@ public:
     const tstring& GetWord(const UINT id) const;
 
 private:
-    const static std::map<UINT, const Dict> ms_dict;
+    const static std::unordered_map<UINT, const Dict> ms_dict;
     LanguagePack& m_langPack = LanguagePack::Instance();
 };

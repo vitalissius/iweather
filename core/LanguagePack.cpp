@@ -97,7 +97,7 @@ const std::string& LanguagePack::GetCompassRoseName(units::CompassRoseUnits comp
 
 
 
-const std::map<LanguagePack::Keys, std::vector<std::string>> LanguagePack::csm_engPack
+const std::unordered_map<LanguagePack::Keys, std::vector<std::string>> LanguagePack::csm_engPack
 {
     std::make_pair<Keys, std::vector<std::string>>(KEY_PRESSURE,{ "atm", "mmHg", "mb", "inHg" }),
     std::make_pair<Keys, std::vector<std::string>>(KEY_SPEED,{ "km/h", "m/s", "mph", "ft/s" }),
@@ -111,7 +111,7 @@ const std::map<LanguagePack::Keys, std::vector<std::string>> LanguagePack::csm_e
     })
 };
 
-const std::map<LanguagePack::Keys, std::vector<std::string>> LanguagePack::csm_rusPack
+const std::unordered_map<LanguagePack::Keys, std::vector<std::string>> LanguagePack::csm_rusPack
 {
     std::make_pair<Keys, std::vector<std::string>>(KEY_PRESSURE,{ "אעל", "לל נע.סע.", "לבאנ", "ה‏יל נע.סע." }),
     std::make_pair<Keys, std::vector<std::string>>(KEY_SPEED,{ "ךל/ק", "ל/ס", "לטכü/ק", "פע/ס" }),

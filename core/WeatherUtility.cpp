@@ -5,12 +5,12 @@ std::string makePath(const DataResource resource, const std::string& value,
 {
     static const std::string accuApikey = "s0LAbqAqtCqL7Of2KcrcnXDfgG3ika6G";
 
-    static const std::map<LanguagePack::LanguageUnits, const char*> langs{
+    static const std::unordered_map<LanguagePack::LanguageUnits, const char*> langs{
         { LanguagePack::LanguageUnits::ENG, "en-US" },
         { LanguagePack::LanguageUnits::RUS, "ru-RU" }
     };
 
-    static const std::map<DataResource, const std::string> paths{
+    static const std::unordered_map<DataResource, const std::string> paths{
         { DataResource::ACCU_CURRENTCONDITIONS, "/currentconditions/v1/_?details=true&metric=true&apikey=_&language=" },
         { DataResource::ACCU_FORECASTS,         "/forecasts/v1/daily/5day/_?details=true&metric=true&apikey=_&language=" },
         { DataResource::ACCU_LOCATIONS,         "/locations/v1/search?q=_&apikey=_" },

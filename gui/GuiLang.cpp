@@ -66,7 +66,7 @@ const tstring& GuiLang::GetWord(const UINT id) const
 
 
 
-const std::map<UINT, const GuiLang::Dict> GuiLang::ms_dict{
+const std::unordered_map<UINT, const GuiLang::Dict> GuiLang::ms_dict{
     { IDS_REFRESH, { TEXT("Refresh"), TEXT("Обновить") } },
     { IDS_PIN, { TEXT("Pin"), TEXT("Закрепить") } },
     { IDS_FORECAST, { TEXT("Show forecast"), TEXT("Показывать прогноз") } },

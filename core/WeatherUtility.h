@@ -5,7 +5,7 @@
 
 #include <boost/asio.hpp>
 
-#include <map>
+#include <unordered_map>
 #include <string>
 
 enum class DataProvider { YAHOO, ACCUWEATHER };

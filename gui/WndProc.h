@@ -278,7 +278,7 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
                 InitLabelText(label07, fontCommon.GetHandle(), widen(lineSunset).data());
                 if (lines.size() == 5)
                 {
-                    InitLabelText(label08, fontCommon.GetHandle(), widen(std::get<0>(lines[1])).data(), widen(std::get<1>(lines[1])).data(), widen(std::get<2>(lines[1])).data());
+                    InitLabelText(label08, fontCommon.GetHandle(), widen(std::get<0>(lines[0])).data(), widen(std::get<1>(lines[0])).data(), widen(std::get<2>(lines[0])).data());
                     InitLabelText(label09, fontCommon.GetHandle(), widen(std::get<0>(lines[1])).data(), widen(std::get<1>(lines[1])).data(), widen(std::get<2>(lines[1])).data());
                     InitLabelText(label10, fontCommon.GetHandle(), widen(std::get<0>(lines[2])).data(), widen(std::get<1>(lines[2])).data(), widen(std::get<2>(lines[2])).data());
                     InitLabelText(label11, fontCommon.GetHandle(), widen(std::get<0>(lines[3])).data(), widen(std::get<1>(lines[3])).data(), widen(std::get<2>(lines[3])).data());

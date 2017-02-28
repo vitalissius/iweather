@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../core/Utility.h"
+#include "ViewTools.h"
 
 #include <Windows.h>
 #include <windowsx.h>
@@ -10,8 +11,8 @@
 
 class Label;
 
-void InitLabelText(Label& label, const HFONT hFont, const TCHAR* labelText,
-    const TCHAR* tipText = nullptr, const TCHAR* tipTitleText = nullptr);
+void InitLabelText(Label& label, const Font& font, const tstring& labelText,
+    const tstring& tipText=TEXT(""), const tstring& tipTitleText=TEXT(""));
 
 class Label : private Noncopyable {
 public:

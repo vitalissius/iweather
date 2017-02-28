@@ -268,21 +268,25 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
                     lines.emplace_back(tmp, forecast.GetDate(), forecast.GetDescriptionText());
                 }
 
-                InitLabelText(label00, fontTitle.GetHandle(), widen(lineLocation).data(), widen(linePubDate).data());
-                InitLabelText(label01, fontBig.GetHandle(), widen(lineCondTemp).data());
-                InitLabelText(label02, fontCommon.GetHandle(), widen(lineCondText).data());
-                InitLabelText(label03, fontCommon.GetHandle(), widen(linePressure).data(), widen(linePressureState).data());
-                InitLabelText(label04, fontCommon.GetHandle(), widen(lineWindSpeed).data(), widen(lineWindDirection).data());
-                InitLabelText(label05, fontCommon.GetHandle(), widen(lineHumidity).data());
-                InitLabelText(label06, fontCommon.GetHandle(), widen(lineSunrise).data());
-                InitLabelText(label07, fontCommon.GetHandle(), widen(lineSunset).data());
+                InitLabelText(label00, fontTitle, widen(lineLocation), widen(linePubDate));
+                InitLabelText(label01, fontBig, widen(lineCondTemp));
+                InitLabelText(label02, fontCommon, widen(lineCondText));
+                InitLabelText(label03, fontCommon, widen(linePressure), widen(linePressureState));
+                InitLabelText(label04, fontCommon, widen(lineWindSpeed), widen(lineWindDirection));
+                InitLabelText(label05, fontCommon, widen(lineHumidity));
+                InitLabelText(label06, fontCommon, widen(lineSunrise));
+                InitLabelText(label07, fontCommon, widen(lineSunset));
                 if (lines.size() == 5)
                 {
-                    InitLabelText(label08, fontCommon.GetHandle(), widen(std::get<0>(lines[0])).data(), widen(std::get<1>(lines[0])).data(), widen(std::get<2>(lines[0])).data());
-                    InitLabelText(label09, fontCommon.GetHandle(), widen(std::get<0>(lines[1])).data(), widen(std::get<1>(lines[1])).data(), widen(std::get<2>(lines[1])).data());
-                    InitLabelText(label10, fontCommon.GetHandle(), widen(std::get<0>(lines[2])).data(), widen(std::get<1>(lines[2])).data(), widen(std::get<2>(lines[2])).data());
-                    InitLabelText(label11, fontCommon.GetHandle(), widen(std::get<0>(lines[3])).data(), widen(std::get<1>(lines[3])).data(), widen(std::get<2>(lines[3])).data());
-                    InitLabelText(label12, fontCommon.GetHandle(), widen(std::get<0>(lines[4])).data(), widen(std::get<1>(lines[4])).data(), widen(std::get<2>(lines[4])).data());
+                    static const auto labelText = [&lines](size_t pos) { return widen(std::get<0>(lines[pos])); };
+                    static const auto tipText = [&lines](size_t pos) { return widen(std::get<1>(lines[pos])); };
+                    static const auto tipTitleText = [&lines](size_t pos) { return widen(std::get<2>(lines[pos])); };
+
+                    InitLabelText(label08, fontCommon, labelText(0), tipText(0), tipTitleText(0));
+                    InitLabelText(label09, fontCommon, labelText(1), tipText(1), tipTitleText(1));
+                    InitLabelText(label10, fontCommon, labelText(2), tipText(2), tipTitleText(2));
+                    InitLabelText(label11, fontCommon, labelText(3), tipText(3), tipTitleText(3));
+                    InitLabelText(label12, fontCommon, labelText(4), tipText(4), tipTitleText(4));
                 }
 
                 const auto& rv = weatherData->GetForecastVector();

@@ -1,15 +1,15 @@
 #include "ViewElement.h"
 
-void InitLabelText(Label& label, const HFONT hFont, const TCHAR* labelText,
-    const TCHAR* tipText, const TCHAR* tipTitleText)
+void InitLabelText(Label& label, const Font& font, const tstring& labelText,
+    const tstring& tipText, const tstring& tipTitleText)
 {
-    label.SetFont(hFont);
-    label.SetText(labelText);
+    label.SetFont(font.GetHandle());
+    label.SetText(labelText.data());
 
     if (label.GetLabelType() == Label::LabelType::WithTip)
     {
-        if (tipText) { label.SetTipText(PTSTR(tipText)); }
-        if (tipTitleText) { label.SetTipTitle(tipTitleText); }
+        if (!tipText.empty()) { label.SetTipText(PTSTR(tipText.data())); }
+        if (!tipTitleText.empty()) { label.SetTipTitle(tipTitleText.data()); }
     }
 }
 

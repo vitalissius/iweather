@@ -69,11 +69,7 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
     static Label label05;
     static Label label06;
     static Label label07;
-    static Label label08;
-    static Label label09;
-    static Label label10;
-    static Label label11;
-    static Label label12;
+    static std::array<Label, 5> forecastLabels;
 
     static Brush brush;
 
@@ -86,7 +82,7 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
     static GdiplusDrawer drawler;
 
     static std::unique_ptr<AbstractWeather> weatherData = std::make_unique<AccuWeather>();  // YahooWeather
-    static std::vector<int> weatherCodes(6, 48);
+    static std::vector<int> weatherCodes(6, 48);    // 48 - Not Available Code
 
     static GuiLang guiLang;
 
@@ -140,11 +136,10 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
             label05.Make(hWndProc, IDL_HUMIDITY, labelPos[5], Label::LabelType::Simple, SHOW_BORDER);
             label06.Make(hWndProc, IDL_SUNRISE, labelPos[6], Label::LabelType::Simple, SHOW_BORDER);
             label07.Make(hWndProc, IDL_SUNSET, labelPos[7], Label::LabelType::WithTip, SHOW_BORDER);
-            label08.Make(hWndProc, IDL_DAY1, labelPos[8], Label::LabelType::WithTip, SS_CENTER | SHOW_BORDER);
-            label09.Make(hWndProc, IDL_DAY2, labelPos[9], Label::LabelType::WithTip, SS_CENTER | SHOW_BORDER);
-            label10.Make(hWndProc, IDL_DAY3, labelPos[10], Label::LabelType::WithTip, SS_CENTER | SHOW_BORDER);
-            label11.Make(hWndProc, IDL_DAY4, labelPos[11], Label::LabelType::WithTip, SS_CENTER | SHOW_BORDER);
-            label12.Make(hWndProc, IDL_DAY5, labelPos[12], Label::LabelType::WithTip, SS_CENTER | SHOW_BORDER);
+            for (size_t i = 0; i < forecastLabels.size(); ++i)
+            {
+                forecastLabels[i].Make(hWndProc, IDL_DAY1 + i, labelPos[8 + i], Label::LabelType::WithTip, SS_CENTER);
+            }
 
             PostMessage(hWndProc, WMU_UPDATE_DATA, 0, 0);
         }
@@ -258,7 +253,8 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
                 std::string lineSunset = weatherData->GetSunsetLine();
 
                 std::vector<std::tuple<std::string, std::string, std::string>> lines;
-                for (const auto& forecast : weatherData->GetForecastVector())
+                const auto& forecastVectorRef = weatherData->GetForecastVector();
+                for (const auto& forecast : forecastVectorRef)
                 {
                     std::string tmp = forecast.GetDayName();
                     std::transform(tmp.begin(), tmp.end(), tmp.begin(), std::toupper);
@@ -276,29 +272,21 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
                 InitLabelText(label05, fontCommon, widen(lineHumidity));
                 InitLabelText(label06, fontCommon, widen(lineSunrise));
                 InitLabelText(label07, fontCommon, widen(lineSunset));
-                if (lines.size() == 5)
-                {
-                    static const auto labelText = [&lines](size_t pos) { return widen(std::get<0>(lines[pos])); };
-                    static const auto tipText = [&lines](size_t pos) { return widen(std::get<1>(lines[pos])); };
-                    static const auto tipTitleText = [&lines](size_t pos) { return widen(std::get<2>(lines[pos])); };
 
-                    InitLabelText(label08, fontCommon, labelText(0), tipText(0), tipTitleText(0));
-                    InitLabelText(label09, fontCommon, labelText(1), tipText(1), tipTitleText(1));
-                    InitLabelText(label10, fontCommon, labelText(2), tipText(2), tipTitleText(2));
-                    InitLabelText(label11, fontCommon, labelText(3), tipText(3), tipTitleText(3));
-                    InitLabelText(label12, fontCommon, labelText(4), tipText(4), tipTitleText(4));
+                static const auto labelText = [&lines](size_t pos) { return widen(std::get<0>(lines[pos])); };
+                static const auto tipText = [&lines](size_t pos) { return widen(std::get<1>(lines[pos])); };
+                static const auto tipTitleText = [&lines](size_t pos) { return widen(std::get<2>(lines[pos])); };
+                for (size_t i = 0; i < forecastLabels.size(); ++i)
+                {
+                    InitLabelText(forecastLabels[i], fontCommon, labelText(i), tipText(i), tipTitleText(i));
                 }
 
-                const auto& rv = weatherData->GetForecastVector();
                 weatherCodes.clear();
-                weatherCodes.push_back(weatherData->GetConditionCode());
-                if (rv.size() == 5)
+                // Update codes (weatherCodes used for redraw pictures in main window):
+                weatherCodes.push_back(weatherData->GetConditionCode());        // current condition code
+                for (size_t i = 0; i < forecastVectorRef.size(); ++i)
                 {
-                    weatherCodes.push_back(rv[0].GetCode());
-                    weatherCodes.push_back(rv[1].GetCode());
-                    weatherCodes.push_back(rv[2].GetCode());
-                    weatherCodes.push_back(rv[3].GetCode());
-                    weatherCodes.push_back(rv[4].GetCode());
+                    weatherCodes.push_back(forecastVectorRef[i].GetCode());     // 5-day forecast codes
                 }
 
                 if (settingsCurrent.GetForecastFlag())

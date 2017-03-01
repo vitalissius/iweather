@@ -2,8 +2,6 @@
 
 void AccuWeather::Update(const std::string& woeid)
 {
-    auto prevloc = std::locale::global(std::locale::classic()); // Set C-locale
-
     std::string page = downloadData("dataservice.accuweather.com", woeid,
         DataResource::ACCU_LOCATIONS_INFO, m_langPack.GetLanguageUnit());
     Json::Value root;
@@ -18,10 +16,12 @@ void AccuWeather::Update(const std::string& woeid)
 
     page = std::move(downloadData("dataservice.accuweather.com", woeid,
         DataResource::ACCU_CURRENTCONDITIONS, m_langPack.GetLanguageUnit()));
+    auto prevloc = std::locale::global(std::locale::classic());             // Set C-locale
     if (!reader.parse(page, root))
     {
         throw IncorrectFile("Json weather file: parsing error");
     }
+    std::locale::global(prevloc);                                           // Reset to prev locale
     updatePublicationDate(root);
     updateCondition(root[0]);
     updateAtmosphere(root[0]);
@@ -29,14 +29,14 @@ void AccuWeather::Update(const std::string& woeid)
 
     page = std::move(downloadData("dataservice.accuweather.com", woeid,
         DataResource::ACCU_FORECASTS, m_langPack.GetLanguageUnit()));
+    prevloc = std::locale::global(std::locale::classic());                  // Set C-locale
     if (!reader.parse(page, root))
     {
         throw IncorrectFile("Json weather file: parsing error");
     }
+    std::locale::global(prevloc);                                           // Reset to prev locale
     updateAstronomy(root["DailyForecasts"][0]);
     updateForecast(root["DailyForecasts"]);
-
-    std::locale::global(prevloc);
 }
 
 void AccuWeather::updateLocation(const Json::Value& root)

@@ -273,12 +273,22 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
                 InitLabelText(label06, fontCommon, widen(lineSunrise));
                 InitLabelText(label07, fontCommon, widen(lineSunset));
 
-                static const auto labelText = [&lines](size_t pos) { return widen(std::get<0>(lines[pos])); };
-                static const auto tipText = [&lines](size_t pos) { return widen(std::get<1>(lines[pos])); };
-                static const auto tipTitleText = [&lines](size_t pos) { return widen(std::get<2>(lines[pos])); };
+                static const auto labelText = [](const decltype(lines)& lines, size_t pos)
+                {
+                    return widen(std::get<0>(lines[pos]));
+                };
+                static const auto tipText = [](const decltype(lines)& lines, size_t pos)
+                {
+                    return widen(std::get<1>(lines[pos]));
+                };
+                static const auto tipTitleText = [](const decltype(lines)& lines, size_t pos)
+                {
+                    return widen(std::get<2>(lines[pos]));
+                };
                 for (size_t i = 0; i < forecastLabels.size(); ++i)
                 {
-                    InitLabelText(forecastLabels[i], fontCommon, labelText(i), tipText(i), tipTitleText(i));
+                    InitLabelText(forecastLabels[i], fontCommon,
+                        labelText(lines, i), tipText(lines, i), tipTitleText(lines, i));
                 }
 
                 weatherCodes.clear();

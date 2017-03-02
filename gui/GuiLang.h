@@ -15,9 +15,10 @@ private:
     private:
         const tstring eng;
         const tstring rus;
+        const tstring ukr;
 
     public:
-        Dict(tstring eng, tstring rus);
+        Dict(tstring eng, tstring rus, tstring ukr);
         const tstring& GetWord(LanguagePack::LanguageUnits langUnit) const;
     };
 

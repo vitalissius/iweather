@@ -123,6 +123,7 @@ BOOL CALLBACK WindowProcOptionDlg(HWND hWndOption, UINT uMessage, WPARAM wParam,
             comboboxLanguage.SetFont(font.GetHandle());
             comboboxLanguage.Add(guilang.GetWord(IDS_ENGLISH).data());
             comboboxLanguage.Add(guilang.GetWord(IDS_RUSSIAN).data());
+            comboboxLanguage.Add(guilang.GetWord(IDS_UKRAINIAN).data());
             comboboxLanguage.SetSelection(int(guilang.GetLanguageUnit()));
             comboboxStyle.Make(hWndOption, RECT{ 100, 381, 140, 200 }, IDV_COMBOBOX_STYLE,
                 CBS_DROPDOWNLIST | WS_TABSTOP | WS_VSCROLL);

@@ -7,7 +7,8 @@ std::string makePath(const DataResource resource, const std::string& value,
 
     static const std::unordered_map<LanguagePack::LanguageUnits, const char*> langs{
         { LanguagePack::LanguageUnits::ENG, "en-US" },
-        { LanguagePack::LanguageUnits::RUS, "ru-RU" }
+        { LanguagePack::LanguageUnits::RUS, "ru-RU" },
+        { LanguagePack::LanguageUnits::UKR, "uk-UA" }
     };
 
     static const std::unordered_map<DataResource, const std::string> paths{

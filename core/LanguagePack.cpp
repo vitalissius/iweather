@@ -30,6 +30,10 @@ void LanguagePack::SetLanguageUnit(LanguageUnits languageUnit)
             std::locale::global(std::locale("rus_rus.1251"));
             m_pack = &csm_rusPack;
             break;
+        case LanguageUnits::UKR:
+            std::locale::global(std::locale("ukr_ukr.1251"));
+            m_pack = &csm_ukrPack;
+            break;
     }
 }
 
@@ -122,5 +126,19 @@ const std::unordered_map<LanguagePack::Keys, std::vector<std::string>> LanguageP
         "Восточный",    "Востоко-юго-восточный",       "Юго-восточный",        "Юго-юго-восточный",
         "Южный",        "Юго-юго-западный",             "Юго-западный",         "Западо-юго-западный",
         "Западный",     "Западо-северо-западный",      "Северо-западный",      "Северо-северо-западный"
+    })
+};
+
+const std::unordered_map<LanguagePack::Keys, std::vector<std::string>> LanguagePack::csm_ukrPack
+{
+    std::make_pair<Keys, std::vector<std::string>>(KEY_PRESSURE,{ "атм", "мм рт.ст.", "мбар", "дюйм рт.ст." }),
+    std::make_pair<Keys, std::vector<std::string>>(KEY_SPEED,{ "км/год", "м/с", "миль/год", "фт/с" }),
+    std::make_pair<Keys, std::vector<std::string>>(KEY_TEMPERATURE,{ "C", "F" }),
+    std::make_pair<Keys, std::vector<std::string>>(KEY_PRESSURESTATE,{ "Стаціонарний", "Зростаючий", "Спадний" }),
+    std::make_pair<Keys, std::vector<std::string>>(KEY_COMPASSROSE,{
+        "Північний",    "Північно-північно-східний",   "Північно-східний",     "Східно-північно-східний",
+        "Східний",      "Східно-північно-східний",     "Південно-східний",     "Південно-південно-східний",
+        "Південний",    "Південно-південно-західний",  "Південно-західний",    "Західно-південно-західний",
+        "Західний",     "Західно-північно-західний",   "Північно-західний",    "Північно-північно-західний"
     })
 };

@@ -244,7 +244,10 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
                 std::string linePressureState = weatherData->GetPressureStateLine();
 
                 std::string lineWindSpeed = weatherData->GetWindSpeedLine();
-                std::string lineWindDirection = weatherData->GetWindDirectionLine();
+                std::string lineWindTitle = weatherData->GetWindDescriptionLine();
+                lineWindTitle += ", ";
+                lineWindTitle += weatherData->GetWindDirectionLine();
+                std::string lineWindText = weatherData->GetWindLandConditionsLine();
 
                 std::string lineHumidity = weatherData->GetHumidityLine();
 
@@ -268,7 +271,7 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
                 InitLabelText(label01, fontBig, widen(lineCondTemp));
                 InitLabelText(label02, fontCommon, widen(lineCondText));
                 InitLabelText(label03, fontCommon, widen(linePressure), widen(linePressureState));
-                InitLabelText(label04, fontCommon, widen(lineWindSpeed), widen(lineWindDirection));
+                InitLabelText(label04, fontCommon, widen(lineWindSpeed), widen(lineWindText), widen(lineWindTitle));
                 InitLabelText(label05, fontCommon, widen(lineHumidity));
                 InitLabelText(label06, fontCommon, widen(lineSunrise));
                 InitLabelText(label07, fontCommon, widen(lineSunset));

@@ -10,6 +10,44 @@ int temperatureTo(const int temp, units::TemperatureUnits tempUnit)
 
 /* Methods of the Astronomy additional private structure */
 
+AbstractWeather::Wind::Wind(int direction, float speed)
+    : m_direction(direction)
+    , m_speed(speed)
+    , m_beaufortNumber(windSpeedToBeaufortNumber(m_speed))
+{}
+
+units::BeaufortNumbers AbstractWeather::Wind::windSpeedToBeaufortNumber(float speedKmPerHour)
+{
+    int speed = int(std::ceil(speedKmPerHour));
+
+    if (speed < 1)
+        return units::BeaufortNumbers::BN_CALM;
+    else if (speed < 5)
+        return units::BeaufortNumbers::BN_LIGHT_AIR;
+    else if (speed < 11)
+        return units::BeaufortNumbers::BN_LIGHT_BREEZE;
+    else if (speed < 19)
+        return units::BeaufortNumbers::BN_GENTLE_BREEZE;
+    else if (speed < 28)
+        return units::BeaufortNumbers::BN_MODERATE_BREEZE;
+    else if (speed < 38)
+        return units::BeaufortNumbers::BN_FRESH_BREEZE;
+    else if (speed < 49)
+        return units::BeaufortNumbers::BN_STRONG_BREEZE;
+    else if (speed < 61)
+        return units::BeaufortNumbers::BN_HIGH_WIND;
+    else if (speed < 74)
+        return units::BeaufortNumbers::BN_GALE;
+    else if (speed < 88)
+        return units::BeaufortNumbers::BN_STRONG_GALE;
+    else if (speed < 102)
+        return units::BeaufortNumbers::BN_STORM;
+    else if (speed < 117)
+        return units::BeaufortNumbers::BN_VIOLENT_STORM;
+    else
+        return units::BeaufortNumbers::BN_HURRICANE_FORCE;
+}
+
 AbstractWeather::Astronomy::Astronomy(const char* sunrise, const char* sunset)
     : m_sunrise(sunrise)
     , m_sunset(sunset)
@@ -213,8 +251,7 @@ void AbstractWeather::SetAtmosphere(int humidity, float pressure, int pressureSt
 
 void AbstractWeather::SetWind(int direction, float speed)
 {
-    m_wind.m_direction = direction;
-    m_wind.m_speed = speed;
+    m_wind = Wind(direction, speed);
 }
 
 void AbstractWeather::SetPublicationDate(const char* pubDate)
@@ -296,6 +333,16 @@ std::string AbstractWeather::GetWindSpeedLine() const
     std::stringstream ss;
     ss << std::fixed << std::setprecision(2) << speed;
     return ss.str() + " " + m_langPack.GetSpeedName();
+}
+
+const std::string& AbstractWeather::GetWindDescriptionLine() const
+{
+    return m_langPack.GetWindDescription(m_wind.m_beaufortNumber);
+}
+
+const std::string& AbstractWeather::GetWindLandConditionsLine() const
+{
+    return m_langPack.GetWindLandCondition(m_wind.m_beaufortNumber);
 }
 
 std::string AbstractWeather::GetHumidityLine() const

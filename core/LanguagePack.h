@@ -10,7 +10,10 @@
 class LanguagePack final : private Noncopyable {
 public:
     /* Enums */
-    enum Keys { KEY_PRESSURE, KEY_SPEED, KEY_TEMPERATURE, KEY_PRESSURESTATE, KEY_COMPASSROSE };
+    enum Keys {
+        KEY_PRESSURE, KEY_SPEED, KEY_TEMPERATURE, KEY_PRESSURESTATE, KEY_COMPASSROSE,
+        KEY_WIND_DESCRIPTION, KEY_WIND_LANDCONDITION
+    };
     enum class LanguageUnits : char { ENG, RUS, UKR };
 
 private:
@@ -38,6 +41,8 @@ public:
     const std::string& GetTemperatureName(units::TemperatureUnits temperature) const;
     const std::string& GetPressureStateName(units::PressureStateUnits pressureState) const;
     const std::string& GetCompassRoseName(units::CompassRoseUnits compassRose) const;
+    const std::string& GetWindDescription(units::BeaufortNumbers beaufortNumber) const;
+    const std::string& GetWindLandCondition(units::BeaufortNumbers beaufortNumber) const;
 
 private:
     /* Private const static members */

@@ -25,8 +25,16 @@ private:
 
     /* Additional private structure Wind */
     struct Wind {
-        int m_direction;
-        float m_speed;
+        Wind() = default;
+        Wind(int direction, float speed);
+
+    private:
+        static units::BeaufortNumbers windSpeedToBeaufortNumber(float speedKmPerHour);
+
+    public:
+        int m_direction{};
+        float m_speed{};
+        units::BeaufortNumbers m_beaufortNumber{};
     };
 
     /* Additional private structure Atmosphere */
@@ -173,6 +181,10 @@ public:
 
     //@return: String describing wind speed
     std::string GetWindSpeedLine() const;
+
+    const std::string& GetWindDescriptionLine() const;
+
+    const std::string& GetWindLandConditionsLine() const;
 
     //@return: String describing humidity of the atmosphere
     std::string GetHumidityLine() const;

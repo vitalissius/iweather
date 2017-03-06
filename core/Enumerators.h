@@ -18,4 +18,20 @@ namespace units {
 	};
 
     enum class WeatherProvider : char { Yahoo, Accuweather };
+
+    enum BeaufortNumbers : char {
+        BN_CALM,
+        BN_LIGHT_AIR,
+        BN_LIGHT_BREEZE,
+        BN_GENTLE_BREEZE,
+        BN_MODERATE_BREEZE,
+        BN_FRESH_BREEZE,
+        BN_STRONG_BREEZE,
+        BN_HIGH_WIND,          // MODERATE GALE / NEAR GALE
+        BN_GALE,               // FRESH GALE
+        BN_STRONG_GALE,        // SEVERE GALE
+        BN_STORM,              // WHOLE GALE
+        BN_VIOLENT_STORM,
+        BN_HURRICANE_FORCE
+    };
 }

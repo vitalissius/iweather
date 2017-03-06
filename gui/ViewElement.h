@@ -32,6 +32,7 @@ public:
     LRESULT SetFont(const HFONT hfont) const;
     LRESULT SetTipText(const TCHAR* text);
     LRESULT SetTipTitle(const TCHAR* text) const;
+    LRESULT SetMaxTipWidth(size_t maxWidth);
     LabelType GetLabelType() const;
 
 private:

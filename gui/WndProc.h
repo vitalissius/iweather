@@ -133,6 +133,7 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
             label02.Make(hWndProc, IDL_CONDITION, labelPos[2], Label::LabelType::Simple, SHOW_BORDER);
             label03.Make(hWndProc, IDL_PRESSURE, labelPos[3], Label::LabelType::WithTip, SHOW_BORDER);
             label04.Make(hWndProc, IDL_WIND, labelPos[4], Label::LabelType::WithTip, SHOW_BORDER);
+            label04.SetMaxTipWidth(200);
             label05.Make(hWndProc, IDL_HUMIDITY, labelPos[5], Label::LabelType::Simple, SHOW_BORDER);
             label06.Make(hWndProc, IDL_SUNRISE, labelPos[6], Label::LabelType::Simple, SHOW_BORDER);
             label07.Make(hWndProc, IDL_SUNSET, labelPos[7], Label::LabelType::WithTip, SHOW_BORDER);

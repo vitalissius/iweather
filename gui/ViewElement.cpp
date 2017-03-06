@@ -103,6 +103,11 @@ LRESULT Label::SetTipTitle(const TCHAR* text) const
     return SendMessage(m_tipHandle, TTM_SETTITLE, WPARAM(0), LPARAM(text));
 }
 
+LRESULT Label::SetMaxTipWidth(size_t maxWidth)
+{
+    return SendMessage(m_tipHandle, TTM_SETMAXTIPWIDTH, 0, maxWidth);
+}
+
 Label::LabelType Label::GetLabelType() const
 {
     return m_type;

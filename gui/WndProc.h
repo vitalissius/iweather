@@ -46,17 +46,17 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
     static Font fontCommon(18, 0, FW_DONTCARE, fontName);
 
     static constexpr std::array<RECT, 13> labelPos{
-        RECT{ 10,  10, 250,  26 },
+        RECT{  10,  10, 250,  26 },
         RECT{ 104,  22, 130, 120 },
-        RECT{ 10, 158, 240,  20 },
-        RECT{ 34, 180, 100,  20 },
-        RECT{ 34, 202,  70,  20 },
-        RECT{ 34, 226,  40,  20 },
+        RECT{  10, 158, 240,  20 },
+        RECT{  34, 180, 100,  20 },
+        RECT{  34, 202,  76,  20 },
+        RECT{  34, 226,  40,  20 },
         RECT{ 176, 191,  60,  20 },
         RECT{ 176, 213,  60,  20 },
-        RECT{ 4, 252,  36,  88 },
-        RECT{ 50, 252,  36,  88 },
-        RECT{ 96, 252,  36,  88 },
+        RECT{   4, 252,  36,  88 },
+        RECT{  50, 252,  36,  88 },
+        RECT{  96, 252,  36,  88 },
         RECT{ 142, 252,  36,  88 },
         RECT{ 188, 252,  36,  88 },
     };

@@ -433,6 +433,12 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
             return (LONG)GetStockObject(NULL_BRUSH);
         }
 
+        case WM_ERASEBKGND:
+        {
+            InvalidateRect(hWndProc, NULL, FALSE);
+        }
+        break;
+
         case WM_LBUTTONDOWN:
         {
             if (!settingsCurrent.GetPinFlag())

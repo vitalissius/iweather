@@ -88,6 +88,14 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
 
     static POINTS position{};
 
+    static const auto switchClockSystem = []()
+    {
+        if (guiLang.GetLanguageUnit() == LanguagePack::LanguageUnits::ENG)
+            weatherData->ChangeClockSystemTo12h();
+        else
+            weatherData->ChangeClockSystemTo24h();
+    };
+
     switch (uMessage)
     {
         case WM_CREATE:
@@ -116,6 +124,8 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
             }
             // Language
             guiLang.SetLanguageUnit(LanguagePack::LanguageUnits(settingsCurrent.GetLanguage()));
+            switchClockSystem();
+
             guiLang.SetPressureUnit(units::PressureUnits(settingsCurrent.GetPressure()));
             guiLang.SetSpeedUnit(units::SpeedUnits(settingsCurrent.GetSpeed()));
             guiLang.SetTemperatureUnit(units::TemperatureUnits(settingsCurrent.GetTemperature()));
@@ -394,6 +404,8 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
 
                         // Language
                         guiLang.SetLanguageUnit(LanguagePack::LanguageUnits(settingsCurrent.GetLanguage()));
+                        switchClockSystem();
+
                         guiLang.SetPressureUnit(units::PressureUnits(settingsCurrent.GetPressure()));
                         guiLang.SetSpeedUnit(units::SpeedUnits(settingsCurrent.GetSpeed()));
                         guiLang.SetTemperatureUnit(units::TemperatureUnits(settingsCurrent.GetTemperature()));

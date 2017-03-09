@@ -105,6 +105,7 @@
 #define IDS_MISCELLANEOUS   341
 #define IDS_OTHER           342
 #define IDS_UKRAINIAN       343
+#define IDS_NIGHT           344
 
 #define IDP_PNG128_STYLE1_00 500
 #define IDP_PNG128_STYLE1_01 501

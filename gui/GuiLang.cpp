@@ -114,4 +114,5 @@ const std::unordered_map<UINT, const GuiLang::Dict> GuiLang::ms_dict{
     { IDS_TEMPERATURE2, { TEXT("Fahrenheit"), TEXT("Градус Фаренгейта"), TEXT("Градус Фаренгейта") } },
     { IDS_MISCELLANEOUS, { TEXT("Miscellaneous:"), TEXT("Разное:"), TEXT("Різне:") } },
     { IDS_OTHER, { TEXT("Other:"), TEXT("Остальное:"), TEXT("Інше:") } },
+    { IDS_NIGHT, { TEXT("Night: "), TEXT("Ночь: "), TEXT("Ніч: ") } },
 };

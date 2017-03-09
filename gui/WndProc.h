@@ -140,6 +140,7 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
             for (size_t i = 0; i < forecastLabels.size(); ++i)
             {
                 forecastLabels[i].Make(hWndProc, IDL_DAY1 + i, labelPos[8 + i], Label::LabelType::WithTip, SS_CENTER);
+                forecastLabels[i].SetMaxTipWidth(300);
             }
 
             PostMessage(hWndProc, WMU_UPDATE_DATA, 0, 0);
@@ -265,7 +266,22 @@ LRESULT WINAPI WndProc(HWND hWndProc, UINT uMessage, UINT wParam, LONG lParam)
                     tmp += "\n\n\n";
                     tmp += std::to_string(forecast.GetHighTemp()) + "°\n";
                     tmp += std::to_string(forecast.GetLowTemp()) + "°";
-                    lines.emplace_back(tmp, forecast.GetDate(), forecast.GetDescriptionText());
+
+                    std::string description = forecast.GetDescriptionText();
+                    const size_t pos = description.find('|');
+                    if (pos < std::string::npos)    // If true - Is used description from AccuWeather
+                    {
+                        const std::string title = description.substr(0, pos - 1);
+                        std::string text = conv(guiLang.GetWord(IDS_NIGHT));
+                        text += description.substr(pos + 1, description.size());
+                        text += '\n';
+                        text += forecast.GetDate();
+                        lines.emplace_back(std::move(tmp), std::move(text), std::move(title));
+                    }
+                    else                            // Is used description from YahooWeather
+                    {
+                        lines.emplace_back(std::move(tmp), forecast.GetDate(), std::move(description));
+                    }
                 }
 
                 InitLabelText(label00, fontTitle, widen(lineLocation), widen(linePubDate));
